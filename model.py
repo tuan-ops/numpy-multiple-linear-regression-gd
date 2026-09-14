@@ -60,8 +60,18 @@ def split_train_val_test(X, y, train_frac=0.6, val_frac=0.2):
     y_test = y[n_train + n_val:]
     return (X_train, y_train, X_val, y_val, X_test, y_test)
 
-# Step 3 - compute_feature_stats (not yet solved)
-# TODO: implement
+# Step 3 - compute_feature_stats
+import numpy as np
+def compute_feature_stats(X):
+    """
+        Bước này sẽ chuẩn hóa cho toàn bộ tập train tính mean và std 
+        cho từng cột (từng feature) sau đó sẽ áp dụng công thức chuẩn hóa
+    """
+    mean = np.mean(X, axis = 0)
+    std = np.std(X, axis =0)
+    std = np.where(std == 0.0 , 1.0, std)
+    z = (X - mean) / std
+    return mean, std
 
 # Step 4 - standardize_features (not yet solved)
 # TODO: implement
