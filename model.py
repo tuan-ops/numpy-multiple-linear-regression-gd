@@ -123,8 +123,16 @@ def mse_loss(y_true, y_pred):
     mse = se / n
     return mse
 
-# Step 9 - mse_gradient (not yet solved)
-# TODO: implement
+# Step 9 - mse_gradient
+import numpy as np
+def mse_gradient(X, y_true, y_pred):
+    # TODO: Return the analytic MSE gradient w.r.t. weights: (2/n) X^T (y_pred - y_true)
+    X = np.asarray(X)
+    y_true = np.asarray(y_true)
+    y_pred = np.asarray(y_pred)
+    n = len(y_true)
+    w_grad = 2/n * (X.T @ (y_pred-y_true))
+    return w_grad
 
 # Step 10 - normal_equation (not yet solved)
 # TODO: implement
