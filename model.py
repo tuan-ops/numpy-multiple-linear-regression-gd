@@ -134,8 +134,14 @@ def mse_gradient(X, y_true, y_pred):
     w_grad = 2/n * (X.T @ (y_pred-y_true))
     return w_grad
 
-# Step 10 - normal_equation (not yet solved)
-# TODO: implement
+# Step 10 - normal_equation
+import numpy as np
+def normal_equation(X, y):
+    # TODO: Solve for the closed-form least-squares weights via the normal equation.
+    X = np.asarray(X)
+    y = np.asarray(y)
+    w = np.linalg.inv(X.T @ X) @ X.T @ y 
+    return w
 
 # Step 11 - initialize_weights (not yet solved)
 # TODO: implement
