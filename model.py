@@ -251,8 +251,19 @@ def run_one_epoch(state, X_train, y_train, X_val, y_val, lr, patience):
     state["stopped"] = stop 
     return state
 
-# Step 17 - train_batch_gd (not yet solved)
-# TODO: implement
+# Step 17 - train_batch_gd
+def train_batch_gd(X_train, y_train, X_val, y_val, lr, epochs, patience, seed=None):
+    # TODO: Train weights with full-batch GD for up to epochs, with early stopping.
+    n_features = X_train.shape[1]
+    weights = initialize_weights(n_features, seed = seed)
+    state = init_training_state(n_features, seed = seed)
+    for epoch in range(epochs):
+        weights = gd_step(X_train, y_train, weights, lr)
+        train_loss, val_loss = epoch_train_val_losses(X_train, y_train, X_val, y_val, weights)
+        state = run_one_epoch(state, X_train, y_train, X_val, y_val, lr, patience)
+        if state["stopped"] == True:
+            break 
+    return state["weights"], state["train_losses"], state["val_losses"]
 
 # Step 18 - mean_absolute_error (not yet solved)
 # TODO: implement
