@@ -140,7 +140,7 @@ def normal_equation(X, y):
     # TODO: Solve for the closed-form least-squares weights via the normal equation.
     X = np.asarray(X)
     y = np.asarray(y)
-    w = np.linalg.inv(X.T @ X) @ X.T @ y 
+    w = np.linalg.pinv(X.T @ X) @ X.T @ y 
     return w
 
 # Step 11 - initialize_weights
@@ -352,8 +352,23 @@ def create_lr_model(learning_rate=0.01, epochs=1000, patience=50, seed=0):
     model["val_losses"] = []
     return model
 
-# Step 25 - fit_lr_model (not yet solved)
-# TODO: implement
+# Step 25 - fit_lr_model
+import numpy as np
+def fit_lr_model(model, X_train, y_train, X_val, y_val):
+    # TODO: Fit model with train stats, design matrices, GD, and normal eq
+    epochs = model["epochs"]
+    mean, std = compute_feature_stats(X_train)
+    X_train = prepare_design_matrix(X_train, mean, std)
+    X_val = prepare_design_matrix(X_val, mean, std)
+    weights, train_losses, val_losses = train_batch_gd(X_train, y_train, X_val, y_val, model["learning_rate"], epochs, model["patience"], model["seed"])
+    normal_weights = normal_equation(X_train, y_train)
+    model["mean"] = mean 
+    model["std"] = std 
+    model["weights"] = weights 
+    model["train_losses"] = train_losses
+    model["val_losses"] = val_losses
+    model["normal_weights"] = normal_weights
+    return model
 
 # Step 26 - predict_lr_model (not yet solved)
 # TODO: implement
