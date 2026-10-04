@@ -287,8 +287,21 @@ def root_mean_squared_error(y_true, y_pred):
     RMSE = (1/n * MSE) ** 0.5
     return RMSE
 
-# Step 20 - r_squared (not yet solved)
-# TODO: implement
+# Step 20 - r_squared
+def r_squared(y_true, y_pred):
+    # TODO: Compute the coefficient of determination R^2.
+    n = len(y_true)
+    res, tot = 0.0, 0.0
+    sum = 0.0
+    for i in range(n):
+        sum += y_true[i]
+    y_mean = sum / n
+    for i in range(n):
+        res += (y_true[i] - y_pred[i]) ** 2
+        tot += (y_true[i] - y_mean) ** 2
+    if tot == 0: return float('nan')
+    R_square = 1 - res / tot 
+    return R_square
 
 # Step 21 - evaluate_regression (not yet solved)
 # TODO: implement
