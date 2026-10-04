@@ -265,8 +265,17 @@ def train_batch_gd(X_train, y_train, X_val, y_val, lr, epochs, patience, seed=No
             break 
     return state["weights"], state["train_losses"], state["val_losses"]
 
-# Step 18 - mean_absolute_error (not yet solved)
-# TODO: implement
+# Step 18 - mean_absolute_error
+def mean_absolute_error(y_true, y_pred):
+    # TODO: Compute the mean absolute error between true targets and predictions
+    n = len(y_true)
+    mae = 0
+    for i in range(n):
+        if y_true[i] < y_pred[i]:
+            mae -= y_true[i] - y_pred[i]
+        else:
+            mae += y_true[i] - y_pred[i]
+    return mae * 1/n
 
 # Step 19 - root_mean_squared_error (not yet solved)
 # TODO: implement
